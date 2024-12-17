@@ -1,8 +1,10 @@
 <linker>
   <assembly fullname="CommonUtils, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="ColorData" preserve="all" />
+    <type fullname="Game.CommonUtils.Colors.Config.ColorData" preserve="all" />
+    <type fullname="Game.CommonUtils.Colors.Config.QueensColorData" preserve="all" />
     <type fullname="LocalizationData" preserve="all" />
-    <type fullname="ColorData/ComponentEntry" preserve="nothing" serialized="true" />
+    <type fullname="Game.CommonUtils.Colors.Config.ColorData/ComponentEntry" preserve="nothing" serialized="true" />
+    <type fullname="Game.CommonUtils.Colors.Config.QueensColorData/ComponentEntry" preserve="nothing" serialized="true" />
     <type fullname="LocalizationData/LocalizationEntry" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

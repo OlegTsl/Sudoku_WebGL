@@ -4,9 +4,78 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | DefendersAdventure</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #231F20;
+        text-align: center; /* Оставляем выравнивание по центру */
+      }
+      #loadingMessage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 20px;
+      }
+      #unity-canvas {
+        width: 360px;
+        height: 640px;
+        background: #231F20;
+        margin: 0 auto;
+        position: fixed; /* Позиционируем канвас */
+      }
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      #progressBar {
+        width: 100%;
+        height: 5px;
+        background-color: #444;
+        position: absolute;
+        top: 80%;
+        left: 0;
+        transform: translateY(-50%);
+      }
+      #progressBarFilled {
+        height: 100%;
+        background-color: #3498db;
+        width: 0%;
+      }
+      #progressText {
+        position: absolute;
+        top: 85%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 16px;
+      }
+    </style>
   </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width=360 height=640 tabindex="-1" style="width: 360px; height: 640px; background: #231F20"></canvas>
+  <body>
+    <div id="loadingMessage">Loading...</div>
+    <div class="spinner" style="display: none;"></div> <!-- Spinning loader -->
+    <canvas id="unity-canvas" width="360" height="640" tabindex="-1"></canvas>
+    <div id="progressBar">
+      <div id="progressBarFilled"></div>
+    </div>
+    <div id="progressText">0% / 0 MB</div>
+
     <script src="Build/WebGLVersion.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -24,6 +93,13 @@
         document.body.style.textAlign = "left";
       }
 
+      // Function to update the progress bar
+      function updateProgressBar(loaded, total) {
+        var progress = (loaded / total) * 100;
+        document.getElementById('progressBarFilled').style.width = progress + '%';
+        document.getElementById('progressText').innerText = `${Math.round(progress)}% / ${(loaded / 1024 / 1024).toFixed(2)} MB`;
+      }
+
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/WebGLVersion.data",
         frameworkUrl: "Build/WebGLVersion.framework.js",
@@ -32,8 +108,22 @@
         companyName: "DefaultCompany",
         productName: "DefendersAdventure",
         productVersion: "1.0.2",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+        showLoadingProgress: true,  // Enable to show loading progress
+        showSpinner: true,          // Show spinner during loading
+        module: {
+          // Listen for progress events
+          onProgress: function(loaded, total) {
+            updateProgressBar(loaded, total);  // Update progress bar with current loaded/total data
+          }
+        }
+      }).then(function(unityInstance) {
+        console.log("Unity instance loaded successfully");
+        document.getElementById("loadingMessage").style.display = "none"; // Hide loading message
+        document.querySelector(".spinner").style.display = "none";       // Hide spinner
+      }).catch(function(error) {
+        console.error("Error loading Unity instance: ", error);
+        document.getElementById("loadingMessage").innerText = "Failed to load the game."; // Show error message
+        document.querySelector(".spinner").style.display = "none";  // Hide spinner on error
       });
     </script>
   </body>

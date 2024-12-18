@@ -1,24 +1,20 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/Build/$1"
+      "src": "Build/**/*",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "Build"
+      }
     }
   ],
-  "headers": [
+  "routes": [
     {
-      "source": "/Build/(.*).gz",
-      "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
-        { "key": "Content-Type", "value": "application/javascript" }
-      ]
-    },
-    {
-      "source": "/Build/(.*).br",
-      "headers": [
-        { "key": "Content-Encoding", "value": "br" },
-        { "key": "Content-Type", "value": "application/javascript" }
-      ]
+      "src": "/(.*)",
+      "headers": {
+        "Content-Encoding": "gzip"
+      }
     }
   ]
 }

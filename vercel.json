@@ -3,10 +3,7 @@
   "builds": [
     {
       "src": "Build/**/*",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "Build"
-      }
+      "use": "@vercel/static"
     }
   ],
   "routes": [

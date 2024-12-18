@@ -1,17 +1,23 @@
 {
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/Build/$1"
+    }
+  ],
   "headers": [
     {
-      "source": "/Build/(.*)\\.gz$",
+      "source": "/Build/(.*).gz",
       "headers": [
         { "key": "Content-Encoding", "value": "gzip" },
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        { "key": "Content-Type", "value": "application/javascript" }
       ]
     },
     {
-      "source": "/Build/(.*)\\.br$",
+      "source": "/Build/(.*).br",
       "headers": [
         { "key": "Content-Encoding", "value": "br" },
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        { "key": "Content-Type", "value": "application/javascript" }
       ]
     }
   ]

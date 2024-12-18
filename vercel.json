@@ -38,6 +38,12 @@
       "headers": [
         { "key": "Content-Type", "value": "application/javascript" }
       ]
+    },
+    {
+      "source": "/Build/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
     }
   ]
 }

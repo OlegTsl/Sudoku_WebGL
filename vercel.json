@@ -11,9 +11,36 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/Build/(.*).wasm",
       "headers": {
-        "Content-Encoding": "gzip"
+        "Content-Type": "application/wasm"
+      }
+    },
+    {
+      "src": "/Build/(.*).wasm.gz",
+      "headers": {
+        "Content-Encoding": "gzip",
+        "Content-Type": "application/wasm"
+      }
+    },
+    {
+      "src": "/Build/(.*).data.gz",
+      "headers": {
+        "Content-Encoding": "gzip",
+        "Content-Type": "application/octet-stream"
+      }
+    },
+    {
+      "src": "/Build/(.*).framework.js.gz",
+      "headers": {
+        "Content-Encoding": "gzip",
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/Build/(.*).loader.js",
+      "headers": {
+        "Content-Type": "application/javascript"
       }
     }
   ]

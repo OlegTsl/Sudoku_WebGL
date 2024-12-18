@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Encoding",
-          "value": "gz"
+          "value": "gzip"
         },
         {
           "key": "Content-Type",
@@ -18,7 +18,7 @@
       "headers": [
         {
           "key": "Content-Encoding",
-          "value": "gz"
+          "value": "gzip"
         },
         {
           "key": "Content-Type",
@@ -44,7 +44,7 @@
       "headers": [
         {
           "key": "Content-Encoding",
-          "value": "gz"
+          "value": "gzip"
         },
         {
           "key": "Content-Type",

@@ -1,44 +1,24 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "Build/**/*",
-      "use": "@vercel/static"
+      "source": "/(.*)",
+      "destination": "/Build/$1"
     }
   ],
-  "routes": [
+  "headers": [
     {
-      "src": "/Build/(.*).wasm",
-      "headers": {
-        "Content-Type": "application/wasm"
-      }
+      "source": "/Build/(.*).gz",
+      "headers": [
+        { "key": "Content-Encoding", "value": "gzip" },
+        { "key": "Content-Type", "value": "application/javascript" }
+      ]
     },
     {
-      "src": "/Build/(.*).wasm.gz",
-      "headers": {
-        "Content-Encoding": "gzip",
-        "Content-Type": "application/wasm"
-      }
-    },
-    {
-      "src": "/Build/(.*).data.gz",
-      "headers": {
-        "Content-Encoding": "gzip",
-        "Content-Type": "application/octet-stream"
-      }
-    },
-    {
-      "src": "/Build/(.*).framework.js.gz",
-      "headers": {
-        "Content-Encoding": "gzip",
-        "Content-Type": "application/javascript"
-      }
-    },
-    {
-      "src": "/Build/(.*).loader.js",
-      "headers": {
-        "Content-Type": "application/javascript"
-      }
+      "source": "/Build/(.*).br",
+      "headers": [
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Content-Type", "value": "application/javascript" }
+      ]
     }
   ]
 }

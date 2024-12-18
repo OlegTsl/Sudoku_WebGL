@@ -1,23 +1,23 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/Build/$1"
-    }
-  ],
   "headers": [
     {
-      "source": "/Build/(.*).gz",
+      "source": "/Build/(.*).wasm",
       "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
-        { "key": "Content-Type", "value": "application/javascript" }
+        { "key": "Content-Type", "value": "application/wasm" }
       ]
     },
     {
-      "source": "/Build/(.*).br",
+      "source": "/Build/(.*).wasm.gz",
+      "headers": [
+        { "key": "Content-Encoding", "value": "gzip" },
+        { "key": "Content-Type", "value": "application/wasm" }
+      ]
+    },
+    {
+      "source": "/Build/(.*).wasm.br",
       "headers": [
         { "key": "Content-Encoding", "value": "br" },
-        { "key": "Content-Type", "value": "application/javascript" }
+        { "key": "Content-Type", "value": "application/wasm" }
       ]
     }
   ]

@@ -1,49 +1,56 @@
-{
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/Build/$1"
-    }
-  ],
   "headers": [
     {
-      "source": "/Build/(.*).wasm",
-      "headers": [
-        { "key": "Content-Type", "value": "application/wasm" }
+      "source": "/(.*\\.unityweb)",
+      "headers" : [
+        {
+          "key" : "Content-Encoding",
+          "value" : "gzip"
+        }
       ]
     },
     {
-      "source": "/Build/(.*).wasm.gz",
-      "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
-        { "key": "Content-Type", "value": "application/wasm" }
+      "source": "/(.*\\.wasm\\.unityweb)",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "application/wasm"
+        }
       ]
     },
     {
-      "source": "/Build/(.*).data.gz",
-      "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
-        { "key": "Content-Type", "value": "application/octet-stream" }
+      "source": "/(.*\\.gz)",
+      "headers" : [
+        {
+          "key" : "Content-Encoding",
+          "value" : "gzip"
+        }
       ]
     },
     {
-      "source": "/Build/(.*).framework.js.gz",
-      "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
-        { "key": "Content-Type", "value": "application/javascript" }
+      "source": "/(.*\\.wasm\\.gz)",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "application/wasm"
+        }
       ]
     },
     {
-      "source": "/Build/(.*).loader.js",
-      "headers": [
-        { "key": "Content-Type", "value": "application/javascript" }
+      "source": "/(.*\\.br)",
+      "headers" : [
+        {
+          "key" : "Content-Encoding",
+          "value" : "br"
+        }
       ]
     },
     {
-      "source": "/Build/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      "source": "/(.*\\.wasm\\.br)",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "application/wasm"
+        }
       ]
     }
   ]
-}
